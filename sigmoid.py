@@ -28,7 +28,7 @@ class sigmoid_neuron():
             The standard sigmoid function evaluated on the input vector.
         """
 
-        s = 1 / (1 + np.exp(-x))
+        s = None
         return s
 
     def __sigmoid_derivative(self, x : np.array) -> np.array:
@@ -45,8 +45,8 @@ class sigmoid_neuron():
             The sigmoid derivative evaluated vector.
         """
 
-        s = x * (1 - x)
-        return s
+        ds = None
+        return ds
 
     def train(self, tr_inputs : np.array, tr_outputs : np.array, iters : int):
         """Training method. Updates the synaptic weights of the neuron.
@@ -88,19 +88,10 @@ class sigmoid_neuron():
 
 if __name__ == '__main__':
     # Initialize sigmoid neuron
-    sigmoid = sigmoid_neuron(2)
-    print("Initial (random) weights:")
-    print(sigmoid.synaptic_weights)
 
     # Training data
-    training_inputs = np.array([(1, 0), (0, 0), (0, 1)])
-    training_output = np.array([1, 0, 1]).T.reshape((3, 1))
 
     # Neuron training
-    sigmoid.train(training_inputs, training_output, 10)
-    print("Final synaptic weights (after training): ")
-    print(sigmoid.synaptic_weights)
 
     # Predict for unseen data
-    print("Prediction for (1, 1): ")
-    print(sigmoid.predict(np.array((1, 1))))
+    pass

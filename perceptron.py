@@ -17,10 +17,10 @@ class perceptron():
         
         assert (len(inputs) != len(weights)), "Lists must have the same size!"
 
-        self.size = len(inputs)
-        self.inputs = np.array(inputs)
-        self.weights = np.array(weights)
-        self.name = name or 'Generic perceptron.'
+        self.size = None
+        self.inputs = None
+        self.weights = None
+        self.name = None
 
     def decide(self, bias : int) -> bool:
         """Computes perceptron's output.
@@ -29,13 +29,14 @@ class perceptron():
         ----------
         bias : int
             Integer determining the threshold for the linear map.
+        
+        Returns
+        -------
+        bool
+            The linear decision.
         """
-        return (self.inputs @ self.weights) >= bias
+        return None
 
 
 if __name__ == '__main__':
-    inputs = [1, 1, 0, 1]
-    weights = [-7, 3, 11, 2]
-
-    p = perceptron(inputs, weights)
-    print(p.decide(4))
+    pass
