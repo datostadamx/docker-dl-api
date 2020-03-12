@@ -1,4 +1,4 @@
-# Docker Flask API template 🐳
+# Serving your Deep Learning model with Docker 🐳
 
 <!-- Shields -->
 ![Top language](https://img.shields.io/github/languages/top/datostadamx/docker-dl-api?style=for-the-badge)
