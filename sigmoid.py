@@ -89,7 +89,7 @@ class sigmoid_neuron():
 if __name__ == '__main__':
     # Initialize sigmoid neuron
     sigmoid = sigmoid_neuron(2)
-    print("Initial weights (random):")
+    print("Initial (random) weights:")
     print(sigmoid.synaptic_weights)
 
     # Training data
