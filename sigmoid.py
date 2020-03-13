@@ -2,7 +2,7 @@ import numpy as np
 
 
 class sigmoid_neuron():
-    def __init__(self, n : int):
+    def __init__(self, n, w=None):
         """Constructor method.
 
         Parameters
@@ -10,11 +10,18 @@ class sigmoid_neuron():
         n : int
             The number of synaptic connections, a vector.
         """
+        
+        if w is not None:
+            weights = np.loadtxt(w)
+            self.synaptic_weights = weights
+        else:
+            np.random.seed(123) # We set a random seed for reproductibility
+            self.synaptic_weights = 2 * np.random.random((n, 1)) - 1
+    
+    def save_weights(self, filename='algo.txt'):
+        np.savetxt(filename, self.synaptic_weights)
 
-        np.random.seed(123) # We set a random seed for reproductibility
-        self.synaptic_weights = 2 * np.random.random((n, 1)) - 1
-
-    def __sigmoid(self, x : np.ndarray) -> np.ndarray:
+    def __sigmoid(self, x):
         """Sigmoid function.
         
         Parameters
@@ -28,10 +35,10 @@ class sigmoid_neuron():
             The standard sigmoid function evaluated on the input vector.
         """
 
-        s = None
+        s = 1 / (1 + np.exp(-x))
         return s
 
-    def __sigmoid_derivative(self, x : np.array) -> np.array:
+    def __sigmoid_derivative(self, x):
         """The derivative of the evaluated sigmoid function.
         
         Parameters
@@ -45,10 +52,10 @@ class sigmoid_neuron():
             The sigmoid derivative evaluated vector.
         """
 
-        ds = None
+        ds = x * (1 - x)
         return ds
 
-    def train(self, tr_inputs : np.array, tr_outputs : np.array, iters : int):
+    def train(self, tr_inputs, tr_outputs, iters):
         """Training method. Updates the synaptic weights of the neuron.
         
         Parameters
@@ -68,7 +75,7 @@ class sigmoid_neuron():
                                 self.__sigmoid_derivative(output))
             self.synaptic_weights += adjustment
 
-    def predict(self, inputs : np.array) -> np.array:
+    def predict(self, inputs):
         """Sigmoid function.
         
         Parameters
@@ -88,10 +95,24 @@ class sigmoid_neuron():
 
 if __name__ == '__main__':
     # Initialize sigmoid neuron
+    s = sigmoid_neuron(2)
+    print("Pesos aleatorios:")
+    print(s.synaptic_weights)
 
     # Training data
+    tr_inputs = np.array([(0, 1), (1, 0), (0, 0)])
+    tr_outputs = np.array([1, 1, 0])
 
     # Neuron training
+    print("Iniciamos entrenamiento:")
+    s.train(tr_inputs, tr_outputs, 10000)
+    print("Pesos entrenados:")
+    print(s.synaptic_weights)
 
     # Predict for unseen data
-    pass
+    print("Predicción:")
+    p = s.predict((1, 1))
+    print(p)
+    
+    # Save weights
+    s.save_weights()

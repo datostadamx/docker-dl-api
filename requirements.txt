@@ -1,9 +1,2 @@
-numpy
+numpy==1.17.1
 flask
-pillow
-pandas
-requests
-matplotlib
-tensorflow
-jupyterlab
-ipykernel

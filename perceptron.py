@@ -2,7 +2,7 @@ import numpy as np
 
 
 class perceptron():
-    def __init__(self, inputs : list, weights : list, name : str):
+    def __init__(self, inputs, weights, name=None):
         """Generic perceptron object.
 
         Parameters
@@ -14,15 +14,13 @@ class perceptron():
         name : str, optional
             Name of the perceptron.
         """
-        
-        assert (len(inputs) != len(weights)), "Lists must have the same size!"
 
-        self.size = None
-        self.inputs = None
-        self.weights = None
-        self.name = None
+        self.size = len(inputs)
+        self.inputs = np.array(inputs)
+        self.weights = np.array(weights)
+        self.name = name or 'Generic perceptron.'
 
-    def decide(self, bias : int) -> bool:
+    def decide(self, bias):
         """Computes perceptron's output.
         
         Parameters
@@ -35,8 +33,13 @@ class perceptron():
         bool
             The linear decision.
         """
-        return None
+        
+        return (self.inputs @ self.weights) >= bias
 
 
 if __name__ == '__main__':
-    pass
+    inputs = [1, 1, 1, 1, 0]
+    weights = [-5, 7, 3, -2, 1]
+    datostada = perceptron(inputs, weights)
+    prediction = datostada.decide(6)
+    print("Veredicto:", prediction)

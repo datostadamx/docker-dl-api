@@ -1,13 +1,14 @@
-# FROM - Pull alpine (latest)
+FROM alpine:latest
 
-# RUN - Install python3 and pip
+RUN apk add --no-cache python3-dev\
+    && pip3 install --upgrade pip
 
-# WORKDIR - Create /app folder
+WORKDIR /app
 
-# COPY - Copy contents to /app folder
+COPY . /app
 
-# RUN - Install requirements
+RUN pip3 --no-cache-dir install -r requirements.txt
 
-# EXPOSE - Open port 5000
+EXPOSE 5000
 
-# CMD - Run python3 app.py
+CMD ["python3", "app.py"]
